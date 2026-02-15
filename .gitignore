@@ -8,3 +8,9 @@ __pycache__/
 *.wav
 *.mp3
 *.zip
+edge_pipeline/llm/model/
+edge_pipeline/stt/model/
+*.gguf
+*.zip
+*.wav
+*.mp3
