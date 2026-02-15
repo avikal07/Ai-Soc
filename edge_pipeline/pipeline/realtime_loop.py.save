@@ -1,0 +1,43 @@
+import sys
+import os
+import time
+
+# Allow imports from parent folders
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from audio_io.audio_buffer import AudioBuffer
+from audio_io.wav_stream import WavStream
+
+
+def main():
+    wav_path = "../../demo/sample_audio/input.wav"
+
+    print("Initializing streaming pipeline...")
+
+    stream = WavStream(wav_path=wav_path, chunk_size=1024, realtime=True)
+    buffer = AudioBuffer()
+
+    chunk_count = 0
+    start_time = time.time()
+
+    while True:
+        chunk = stream.read_chunk()
+        if not chunk:
+            break
+
+        buffer.write(chunk)
+        buffered_chunk = buffer.read()
+
+        if buffered_chunk:
+            chunk_count += 1
+
+    end_time = time.time()
+
+    stream.close()
+
+    print("Streaming complete.")
+    print(f"Total chunks processed: {chunk_count}")
+    print(f"Total time: {round(end_time - start_time, 2)} seconds")
+
+
+if __name__ == "__main__":
+    main()
