@@ -173,7 +173,3 @@ Conceptual optimizations:
 Python, Vosk, TinyLlama, CTransformers, Edge AI, Quantized LLMs
 
 ---
-
-## Author
-
-Avikal
